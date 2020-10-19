@@ -1,9 +1,5 @@
 from ai import AI
 from utils import *
-import sys
-
-#sys.setrecursionlimit(4000)
-
 
 def print_board(board):
     for i, row in enumerate(board):
