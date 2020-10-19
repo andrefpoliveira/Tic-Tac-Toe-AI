@@ -9,7 +9,7 @@ class AI:
             x = int(move) // 3
             y = int(move) - (int(move) // 3)*3
 
-            board[x][y] = 'O'
+            board[x][y] = 'X'
 
             moveVal = self.minimax(board, 0, -float("Inf"), float("Inf"), False)
 
@@ -26,12 +26,12 @@ class AI:
         return len(availableMoves(board)) > 0
 
     def minimax(self, board, depth, alpha, beta, isMaximizingPlayer):
-        if checkWin(board) == 'X':
+        if checkWin(board) == 'O':
             #print("Perdi")
-            return -10
-        elif checkWin(board) == 'O':
+            return -10 + depth
+        elif checkWin(board) == 'X':
             #print("Ganhei")
-            return 10
+            return 10 - depth
 
         if len(availableMoves(board)) == 0:
             return 0
@@ -41,7 +41,7 @@ class AI:
             for move in availableMoves(board):
                 x = int(move) // 3
                 y = int(move) - (int(move) // 3)*3
-                board[x][y] = 'O'
+                board[x][y] = 'X'
                 value = self.minimax(board, depth+1, alpha, beta, not isMaximizingPlayer)
                 board[x][y] = move
                 bestVal = max(bestVal, value)
@@ -54,11 +54,11 @@ class AI:
             for move in availableMoves(board):
                 x = int(move) // 3
                 y = int(move) - (int(move) // 3)*3
-                board[x][y] = 'X'
+                board[x][y] = 'O'
                 value = self.minimax(board, depth+1, alpha, beta, not isMaximizingPlayer)
                 board[x][y] = move
                 bestVal = min(bestVal, value)
                 beta = min(beta, bestVal)
 
-                if beta <= alpha: break;
+                if beta <= alpha: break
             return bestVal
