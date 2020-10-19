@@ -36,7 +36,7 @@ def main():
             print("IT'S A TIE!")
             return
 
-        if turn % 2 == 0:
+        if turn % 2 == 1:
             x, y = ask_input(board)
             board[x][y] = 'X'
             print(f"Player 1 chose {x*3 + y}!")
